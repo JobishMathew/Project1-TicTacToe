@@ -166,63 +166,54 @@ public class TicTacToeModel{
            winner */
         
         /* INSERT YOUR CODE HERE */
-        if (getMark(0,0) == mark) {
-            if ((getMark(0,0).equals(getMark(1,0)))
-                && (getMark(1,0).equals(getMark(2,0)))) {
-                return true;
-            }
-        }
-        if (getMark(0,1) == mark) {
-            if ((getMark(0,1).equals(getMark(1,1)))
-                && (getMark(1,1).equals(getMark(2,1)))) {
-                return true;
-            }
-        }
-        if (getMark(0,2) == mark) {
-            if ((getMark(0,2).equals(getMark(1,2)))
-                && (getMark(1,2).equals(getMark(2,2)))) {
-                return true;
-            }
-        }
-        
         //Rows
-        if (getMark(0,0) == mark) {
-            if ((getMark(0,0).equals(getMark(0,1))) 
-                && (getMark(0,1).equals(getMark(0,2)))) {
+        int j;
+        checkRow: for(int i = 0; i < width; i++) {
+            for (j = 0; j < width; j++) {
+                if (grid[i][j] != mark) {
+                    break checkRow;
+                }
+                if (j == width - 1) {
+                    return true;
+                }
+            }
+        }
+
+        //Columns
+        int l;
+        checkCol: for(int k = 0; k < width; k++) {
+            for (l = 0; l < width; l++) {
+                if (grid[l][k] != mark) {
+                    break checkCol;
+                }
+                if (l == width - 1) {
+                    return true;
+                }
+            }
+        }
+
+        //Diagonal
+        checkDiag: for (int m = 0; m < width; m++) {
+            if (grid[m][m] != mark) {
+                break checkDiag;
+            }
+            if (m == width - 1) {
                 return true;
             }
         }
-        if (getMark(1,0) == mark) {
-            if ((getMark(1,0).equals(getMark(1,1))) 
-                && (getMark(1,1).equals(getMark(1,2)))) {
-                return true;
+
+        //Anti-Diagonal
+        checkAnti: for (int n = 0; n < width; n++) {
+            if (grid[n][(width - 1) - n] != mark) {
+                break checkAnti;
             }
-        }
-        if (getMark(2,0) == mark) {
-            if ((getMark(2,0).equals(getMark(2,1))) 
-                && (getMark(2,1).equals(getMark(2,2)))) {
-                return true;
-            }
-        }
-        
-        //Diagonals
-        if (getMark(0,0) == mark) {
-            if ((getMark(0,0).equals(getMark(1,1))) 
-                && (getMark(1,1).equals(getMark(2,2)))) {
-                return true;
-            }
-        }
-        if (getMark(0,2) == mark) {
-            if ((getMark(0,2).equals(getMark(1,1))) 
-                && (getMark(1,1).equals(getMark(2,0)))) {
+            if (n == width - 1) {
                 return true;
             }
         }
         
         return false;
     }
-		
-	
 	
     private boolean isTie() {
         
